@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
+
+  <threadsafe>true</threadsafe>
+  <sessions-enabled>true</sessions-enabled>
+  <runtime>java8</runtime>
+
+  <system-properties>
+    <property name="java.util.logging.config.file" value="WEB-INF/logging.properties"/>
+    <property name="drivername" value="com.mysql.jdbc.Driver"/>
+    <property name="username" value="root"/>
+    <property name="password" value="salasana"/>
+    <property name="localusername" value="master"/>
+    <property name="localpassword" value="salasana"/>
+    <property name="databasename" value="pizzadb"/>
+<!--  <property name="sockectfactory" value="com.google.cloud.sql.mysql.SocketFactory"/> -->
+<!--    <property name="cloudsqlinstance" value="fishlist-287507:europe-west1:fishlistmysql" /> --> 
+<!--  <property name="cloudsqlinstance" value="pizzaapp-290908:europe-north1:pizzamysqlproject" /> -->
+    
+    
+  </system-properties>
+
+</appengine-web-app>

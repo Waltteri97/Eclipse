@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+    <title>Hello App Engine</title>
+  </head>
+
+  <body>
+  
+<!--     <h2>Fill Parameters</h2> -->
+<!-- <form action="/rest/pizzaservice/addpizza" name="send" method="post"> -->
+<!--    <label for="name">Name:</label><br> -->
+<!--    <input type="text" id="name" name="name" value="Waltteri"><br> -->
+<!--    <label for="birthyear">Birthyear:</label><br> -->
+<!--    <input type="text" id="birthyear" name="birthyear" value="18.5"><br> -->
+<!--    <label for="country">Country:</label><br> -->
+<!--    <input type="text" id="country" name="country" value="Hämeenlinna"><br> -->
+<!--    <input type="submit" value="Submit"> -->
+<!-- </form> -->
+
+  <h2>Fill Parameters</h2>
+<form action="/rest/pizzaservice/addpizza" name="send" method="post">
+   <label for="name">Customer:</label><br>
+   <input type="text" id="name" name="name" value="Waltteri"><br>
+   <label for="country">Pizza:</label><br>
+   <input type="text" id="country" name="country" value="Falafel Special"><br>
+   <label for="birthyear">Price:</label><br>
+   <input type="text" id="birthyear" name="birthyear" value="18.5">€<br> 
+   <input type="submit" value="Submit">
+</form>
+
+
+
+    <table>
+      <tr>
+        <td colspan="2" style="font-weight:bold;">Pizzatilaukset:</td>        
+      </tr>
+      <tr>
+        <td><a href='/hello'>The servlet</a></td>
+      </tr>
+    </table>
+  </body>
+</html>
