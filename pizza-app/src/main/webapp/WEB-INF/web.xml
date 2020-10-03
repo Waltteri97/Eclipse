@@ -9,7 +9,7 @@
   </welcome-file-list>
   
   <servlet>
-    <servlet-name>service</servlet-name>
+    <servlet-name>services</servlet-name>
     <servlet-class>
 			org.glassfish.jersey.servlet.ServletContainer
 		</servlet-class>
@@ -22,7 +22,7 @@
   
   
   <servlet-mapping>
-    <servlet-name>service</servlet-name>
+    <servlet-name>services</servlet-name>
     <url-pattern>/rest/*</url-pattern>
   </servlet-mapping>
  
