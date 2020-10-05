@@ -130,7 +130,7 @@ public class PizzaService {
 	   
 	   }
 	   
-	   @POST
+	    @POST
 		@Produces(MediaType.APPLICATION_JSON)//Method returns object as a JSON string
 		@Consumes(MediaType.APPLICATION_JSON)//Method receives object as a JSON string
 		@Path("/addorder")
