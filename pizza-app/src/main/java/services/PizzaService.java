@@ -25,7 +25,7 @@ import javax.ws.rs.core.Response.ResponseBuilder;
 
 import com.google.appengine.api.utils.SystemProperty;
 import java.sql.Statement;
-import conn.Connections;
+import conn.ConnectionsPizza;
 import data.Pizza;
 import data.Order;
 
@@ -52,10 +52,10 @@ public class PizzaService {
 	   Connection conn=null;   
 	   try {
 		   if(SystemProperty.environment.value()  == SystemProperty.Environment.Value.Production) {
-			   conn = Connections.getProductionConnection();
+			   conn = ConnectionsPizza.getProductionConnection();
 		   }
 		   else {
-			   conn = Connections.getDevConnection();
+			   conn = ConnectionsPizza.getDevConnection();
 		   }
 		  
 	   }   catch (Exception e) {
@@ -82,7 +82,7 @@ public class PizzaService {
 	   @POST
 	   @Produces(MediaType.APPLICATION_JSON)
 	   @Consumes("application/x-www-form-urlencoded")
-       @Path("/addorder")
+       @Path("/addordertest")
 	   public Order addOrderByPost(@FormParam("pizza") String pizza, @FormParam("price") float price, @FormParam("first_name") String first_name, @FormParam("last_name") String last_name, @FormParam("email") String email, @FormParam("phonenumber") String phonenumber, @FormParam("address") String address) {
 		   Order order=new Order();
 		   order.setPizza(pizza);
@@ -99,10 +99,10 @@ public class PizzaService {
 	   Connection conn=null;   
 	   try {
 		   if(SystemProperty.environment.value()  == SystemProperty.Environment.Value.Production) {
-			   conn = Connections.getProductionConnection();
+			   conn = ConnectionsPizza.getProductionConnection();
 		   }
 		   else {
-			   conn = Connections.getDevConnection();
+			   conn = ConnectionsPizza.getDevConnection();
 		   }
 		  
 	   }   catch (Exception e) {
@@ -129,4 +129,53 @@ public class PizzaService {
 	   
 	   
 	   }
+	   
+	   @POST
+		@Produces(MediaType.APPLICATION_JSON)//Method returns object as a JSON string
+		@Consumes(MediaType.APPLICATION_JSON)//Method receives object as a JSON string
+		@Path("/addorder")
+		public Order receiveJsonOrder(Order order) {
+			String sql="insert into orders(pizza, price, first_name, last_name, email, phonenumber, address) values(?,?,?,?,?,?,?)";
+			
+			Connection conn=null;
+			try {
+			    if (SystemProperty.environment.value() ==SystemProperty.Environment.Value.Production) {  
+			    	conn = ConnectionsPizza.getProductionConnection();
+			    }
+			    else {
+			    	conn = ConnectionsPizza.getDevConnection();
+			    }
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			PreparedStatement pstmt;
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, order.getPizza());
+				pstmt.setFloat(2,  order.getPrice());
+				pstmt.setString(3,  order.getFirstname());
+				pstmt.setString(4,  order.getLastname());
+				pstmt.setString(5,  order.getEmail());
+				pstmt.setString(6,  order.getPhonenumber());
+				pstmt.setString(7,  order.getAddress());
+				pstmt.execute();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (conn!=null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+//					e.printStackTrace();
+				}
+			}
+			
+			order.setEmail(order.getEmail()+" modified");
+			return order;
+		}
+	   
+	   
 }
