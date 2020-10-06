@@ -90,7 +90,8 @@ public class DatabaseFetcher {
 		    	RS=stmt.executeQuery(sql);
 		    	while (RS.next()) {
 		    		Menu m = new Menu();
-		    		m.setId(RS.getInt("id"));		    		
+		    		m.setId(RS.getInt("id"));		
+		    		m.setPizzaname(RS.getString("pizzaname"));
 		    		m.setTayte1(RS.getString("tayte1"));
 		    		m.setTayte2(RS.getString("tayte2"));
 		    		m.setTayte3(RS.getString("tayte3"));
