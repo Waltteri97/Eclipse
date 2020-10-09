@@ -176,6 +176,59 @@ public class PizzaService {
 			order.setEmail(order.getEmail()+" modified");
 			return order;
 		}
+	    
+	    @GET
+		@Produces(MediaType.APPLICATION_JSON)//Method returns object as a JSON string
+		@Path("/getOrders")
+		public ArrayList<Order> getAllOrders() {
+			String sql="select * from orders";
+			ResultSet RS=null;
+			ArrayList<Order> list=new ArrayList<>();
+			Connection conn=null;
+			try {
+			    if (SystemProperty.environment.value() ==SystemProperty.Environment.Value.Production) {  
+			    	conn = ConnectionsPizza.getProductionConnection();
+			    }
+			    else {
+			    	conn = ConnectionsPizza.getDevConnection();
+			    }
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			Statement stmt;
+			try {
+				stmt = conn.createStatement();
+				RS=stmt.executeQuery(sql);
+				while (RS.next()) {
+					Order f=new Order();
+					f.setId(RS.getInt("id"));
+					f.setPizza(RS.getString("pizza"));
+					f.setPrice(RS.getString("price"));
+					f.setFirstname(RS.getString("first_name"));
+					f.setLastname(RS.getString("last_name"));
+					f.setEmail(RS.getString("email"));
+					f.setPhonenumber(RS.getString("phonenumber"));
+					f.setAddress(RS.getString("address"));
+
+					list.add(f);
+					
+				
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (conn!=null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+//					e.printStackTrace();
+				}
+			}
+			return list;
+		}
 	   
 	   
 }
