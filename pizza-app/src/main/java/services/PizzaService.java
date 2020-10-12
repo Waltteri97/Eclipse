@@ -83,16 +83,17 @@ public class PizzaService {
 	   @Produces(MediaType.APPLICATION_JSON)
 	   @Consumes("application/x-www-form-urlencoded")
        @Path("/addordertest")
-	   public Order addOrderByPost(@FormParam("pizza") String pizza, @FormParam("price") float price, @FormParam("first_name") String first_name, @FormParam("last_name") String last_name, @FormParam("email") String email, @FormParam("phonenumber") String phonenumber, @FormParam("address") String address) {
+	   public Order addOrderByPost(@FormParam("pizza") String pizza, @FormParam("price") float price, @FormParam("restaurant") String restaurant, @FormParam("first_name") String first_name, @FormParam("last_name") String last_name, @FormParam("email") String email, @FormParam("phonenumber") String phonenumber, @FormParam("address") String address) {
 		   Order order=new Order();
 		   order.setPizza(pizza);
 		   order.setPrice(price);
+		   order.setRestaurant(restaurant);
 		   order.setFirstname(first_name);
 		   order.setLastname(last_name);
 		   order.setEmail(email);
 		   order.setPhonenumber(phonenumber);
 		   order.setAddress(address);
-		   String sql="insert into orders(pizza, price, first_name, last_name, email, phonenumber, address) values(?,?,?,?,?,?,?)";
+		   String sql="insert into orders(pizza, price, restaurant, first_name, last_name, email, phonenumber, address) values(?,?,?,?,?,?,?,?)";
 		   
 		 
 		   
@@ -114,11 +115,12 @@ public class PizzaService {
 		   pstmt = conn.prepareStatement(sql);
 		   pstmt.setString(1, pizza);
 		   pstmt.setFloat(2, price);
-		   pstmt.setString(3, first_name);
-		   pstmt.setString(4, last_name);
-		   pstmt.setString(5, email);
-		   pstmt.setString(6, phonenumber);
-		   pstmt.setString(7, address);
+		   pstmt.setString(3, restaurant);
+		   pstmt.setString(4, first_name);
+		   pstmt.setString(5, last_name);
+		   pstmt.setString(6, email);
+		   pstmt.setString(7, phonenumber);
+		   pstmt.setString(8, address);
 
 		   pstmt.execute();
 	   } catch (SQLException e) {
@@ -135,7 +137,7 @@ public class PizzaService {
 		@Consumes(MediaType.APPLICATION_JSON)//Method receives object as a JSON string
 		@Path("/addorder")
 		public Order receiveJsonOrder(Order order) {
-			String sql="insert into orders(pizza, price, first_name, last_name, email, phonenumber, address) values(?,?,?,?,?,?,?)";
+			String sql="insert into orders(pizza, price, restaurant, first_name, last_name, email, phonenumber, address) values(?,?,?,?,?,?,?,?)";
 			
 			Connection conn=null;
 			try {
@@ -154,11 +156,12 @@ public class PizzaService {
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, order.getPizza());
 				pstmt.setFloat(2,  order.getPrice());
-				pstmt.setString(3,  order.getFirstname());
-				pstmt.setString(4,  order.getLastname());
-				pstmt.setString(5,  order.getEmail());
-				pstmt.setString(6,  order.getPhonenumber());
-				pstmt.setString(7,  order.getAddress());
+				pstmt.setString(3,  order.getRestaurant());
+				pstmt.setString(4,  order.getFirstname());
+				pstmt.setString(5,  order.getLastname());
+				pstmt.setString(6,  order.getEmail());
+				pstmt.setString(7,  order.getPhonenumber());
+				pstmt.setString(8,  order.getAddress());
 				pstmt.execute();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -205,6 +208,7 @@ public class PizzaService {
 					f.setId(RS.getInt("id"));
 					f.setPizza(RS.getString("pizza"));
 					f.setPrice(RS.getString("price"));
+					f.setRestaurant(RS.getString("reastaurant"));
 					f.setFirstname(RS.getString("first_name"));
 					f.setLastname(RS.getString("last_name"));
 					f.setEmail(RS.getString("email"));

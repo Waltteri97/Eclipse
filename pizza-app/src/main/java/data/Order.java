@@ -5,6 +5,7 @@ public class Order {
 	private int id;
 	private String pizza;
 	private float price;
+	private String restaurant;
 	private String first_name;
 	private String last_name;
 	private String email;
@@ -26,6 +27,13 @@ public class Order {
 	}
 	public void setPizza(String pizza) {
 		this.pizza = pizza;
+	}
+	
+	public String getRestaurant() {
+		return restaurant;
+	}
+	public void setRestaurant(String restaurant) {
+		this.restaurant = restaurant;
 	}
 	
 	
@@ -82,13 +90,15 @@ public class Order {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-		
+	
+
 
 	
 	
 	public String toString() {
-		return id+" "+pizza+" "+price+" "+first_name+" "+last_name+" "+email+" "+phonenumber+" "+address+"\n";
+		return id+" "+pizza+" "+price+" "+first_name+" "+last_name+" "+email+" "+phonenumber+" "+address+" "+restaurant+"\n";
 	}
+	
 	
 	
 		
