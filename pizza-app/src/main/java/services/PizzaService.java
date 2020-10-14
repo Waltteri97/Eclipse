@@ -208,7 +208,7 @@ public class PizzaService {
 					f.setId(RS.getInt("id"));
 					f.setPizza(RS.getString("pizza"));
 					f.setPrice(RS.getString("price"));
-					f.setRestaurant(RS.getString("reastaurant"));
+					f.setRestaurant(RS.getString("restaurant"));
 					f.setFirstname(RS.getString("first_name"));
 					f.setLastname(RS.getString("last_name"));
 					f.setEmail(RS.getString("email"));
